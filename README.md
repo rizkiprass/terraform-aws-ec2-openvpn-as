@@ -1,5 +1,5 @@
 # terraform-aws-ec2-openvpn
-Terraform module which creates EC2 resources with OpenVPN installed on AWS
+Terraform module which creates EC2 resources with OpenVPN AS (Access Server) installed on AWS
 
 ## Example
 ### Simple EC2-OpenVPN
