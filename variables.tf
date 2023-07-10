@@ -62,3 +62,15 @@ variable "subnet_id" {
   type        = string
   default     = null
 }
+
+variable "ip_address_ec2" {
+  description = "The IP Address of Openvpn-AS EC2"
+  type = string
+  default = null
+}
+
+variable "user_openvpn" {
+  description = "Additional username for login to Openvpn-AS"
+  type = string
+  default = null
+}

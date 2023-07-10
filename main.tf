@@ -1,5 +1,8 @@
 locals {
-
+  vars = {
+    user_openvpn = var.user_openvpn
+    ip_address_ec2 = var.ip_address_ec2
+  }
 }
 
 ################################################################################
@@ -12,14 +15,7 @@ resource "aws_instance" "openvpn" {
   subnet_id              = var.subnet_id
   vpc_security_group_ids = var.create_vpc_security_group_ids ? [aws_security_group.this[0].id] : var.vpc_security_group_ids
   iam_instance_profile   = var.iam_instance_profile
-  user_data              = <<EOF
-#!/bin/bash
-
-apt update && apt -y install ca-certificates wget net-tools gnupg
-wget -qO - https://as-repository.openvpn.net/as-repo-public.gpg | apt-key add -
-echo "deb http://as-repository.openvpn.net/as/debian focal main">/etc/apt/sources.list.d/openvpn-as-repo.list
-apt update && apt -y install openvpn-as | grep -oP 'To login please use the "openvpn" account with "[^"]+" password.' > /home/ubuntu/login-user-pass.txt
-EOF
+  user_data              = base64encode(templatefile("${path.module}/scripts/openvpn-as.sh", local.vars))
 
   metadata_options {
     http_endpoint = "enabled"
@@ -50,7 +46,7 @@ EOF
 //AWS Resource for Create EIP OpenVPN
 resource "aws_eip" "eipovpn" {
   instance = aws_instance.openvpn.id
-  vpc      = true
+  domain      = true
   tags     = { "Name" = "${var.name}-EIP" }
 }
 
