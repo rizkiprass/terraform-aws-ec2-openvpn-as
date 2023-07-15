@@ -17,6 +17,8 @@ cd /usr/local/openvpn_as/scripts/
 
 # Generate a random password
 password=$(openssl rand -base64 12)
+
+#save password
 echo "$password" > /home/ubuntu/user1-password.txt
 
 # Set password for a user
