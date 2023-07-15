@@ -78,5 +78,5 @@ variable "routing_ip" {
 variable "ec2_public_ip" {
   description = "Public IP Address of EC2 which VPN clients use to connect to the Access Server"
   type = string
-  default = null
+  default = ""
 }

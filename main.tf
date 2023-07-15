@@ -2,7 +2,7 @@ locals {
   vars = {
     user_openvpn = var.user_openvpn
     routing_ip = var.routing_ip
-    ec2_public_ip = var.ec2_public_ip
+    ec2_public_ip = aws_eip.eipovpn.public_ip
   }
 }
 

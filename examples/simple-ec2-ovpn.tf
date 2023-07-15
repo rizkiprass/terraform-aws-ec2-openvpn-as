@@ -1,26 +1,26 @@
-#module "ec2-openvpn" {
-#  source = "rizkiprass/ec2-openvpn-as/aws"
-##  version = "~>0.5.0"
-#
-#  name = format("%s-%s-openvpn", var.project, var.environment)
-#
-#  instance_type                 = "t3.micro"
-#  key_name                      = ""
-#  iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
-#  vpc_id                        = "vpc-087c5adcd3a46179f"
-#  subnet_id                     = "subnet-0784cfb35eb544d72"
-#
-#  #Configuration of OpenVPN-AS
-#  user_openvpn = "user-1"
-#  routing_ip = "172.31.0.0/16"
-#  ec2_public_ip = "34.235.110.23"
-##  ip_address_ec2 = ""
-#
-#  tags = merge(local.common_tags, {
-#    OS     = "Ubuntu",
-#    Backup = "DailyBackup"
-#  })
-#}
+module "ec2-openvpn" {
+  source = "rizkiprass/ec2-openvpn-as/aws"
+#  version = "~>0.5.0"
+
+  name = format("%s-%s-openvpn", var.project, var.environment)
+
+  instance_type                 = "t3.micro"
+  key_name                      = ""
+  iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
+  vpc_id                        = "vpc-087c5adcd3a46179f"
+  subnet_id                     = "subnet-0784cfb35eb544d72"
+
+  #Configuration of OpenVPN-AS
+  user_openvpn = "user-1"
+  routing_ip = "172.31.0.0/16"
+  ec2_public_ip = "34.235.110.23"
+#  ip_address_ec2 = ""
+
+  tags = merge(local.common_tags, {
+    OS     = "Ubuntu",
+    Backup = "DailyBackup"
+  })
+}
 
 ################################################################################
 # Supporting Resources
