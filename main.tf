@@ -22,6 +22,9 @@ resource "aws_instance" "openvpn" {
     http_endpoint = "enabled"
     http_tokens   = "required"
   }
+
+  depends_on = [aws_eip.eipovpn]
+
   root_block_device {
     volume_size           = 8
     volume_type           = "gp3"

@@ -13,7 +13,7 @@ module "ec2-openvpn" {
   #Configuration of OpenVPN-AS
   user_openvpn = "user-1"
   routing_ip = "172.31.0.0/16"
-  ec2_public_ip = "34.235.110.23"
+#  ec2_public_ip = "34.235.110.23"
 #  ip_address_ec2 = ""
 
   tags = merge(local.common_tags, {
