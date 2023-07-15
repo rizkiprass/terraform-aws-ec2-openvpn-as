@@ -46,7 +46,7 @@ resource "aws_instance" "openvpn" {
 //AWS Resource for Create EIP OpenVPN
 resource "aws_eip" "eipovpn" {
   instance = aws_instance.openvpn.id
-  domain      = true
+  vpc      = true
   tags     = { "Name" = "${var.name}-EIP" }
 }
 
