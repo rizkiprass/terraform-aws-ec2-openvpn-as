@@ -1,15 +1,16 @@
 module "ec2-openvpn" {
-  source = "rizkiprass/ec2-openvpn/aws"
+  source = "rizkiprass/ec2-openvpn-as/aws"
+  version = "~>0.5.0"
 
   name = format("%s-%s-openvpn", var.project, var.environment)
 
   instance_type                 = "t3.micro"
-  key_name                      = "sandbox-key-2"
+  key_name                      = ""
   iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
-  vpc_id                        = "vpc-06409c7d1459a1aae"
-  subnet_id                     = "subnet-057874b9829745a19"
+  vpc_id                        = "vpc-03a2efb168f8a4c70"
+  subnet_id                     = "subnet-026a99e257d62416c"
   #Configuration of OpenVPN-AS
-#  user_openvpn = ""
+  user_openvpn = "user-1"
 #  ip_address_ec2 = ""
 
   tags = merge(local.common_tags, {

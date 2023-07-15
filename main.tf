@@ -43,7 +43,7 @@ resource "aws_instance" "openvpn" {
   #  })
 }
 
-//AWS Resource for Create EIP OpenVPN ts
+//AWS Resource for Create EIP OpenVPN
 resource "aws_eip" "eipovpn" {
   instance = aws_instance.openvpn.id
   vpc      = true
