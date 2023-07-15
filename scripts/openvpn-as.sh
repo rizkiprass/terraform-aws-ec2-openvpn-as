@@ -19,7 +19,7 @@ cd /usr/local/openvpn_as/scripts/
 password=$(openssl rand -base64 12)
 
 #save password
-echo "$password" > /home/ubuntu/user1-password.txt
+echo "$password"> /home/ubuntu/user1-password.txt
 
 # Set password for a user
 ./sacli --user ${user_openvpn} --new_pass "$password" SetLocalPassword
