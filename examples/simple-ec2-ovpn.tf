@@ -1,6 +1,6 @@
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
-  version = "~>0.5.0"
+#  version = "~>0.5.0"
 
   name = format("%s-%s-openvpn", var.project, var.environment)
 
