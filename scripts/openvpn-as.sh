@@ -33,6 +33,7 @@ sed -E -i "s/\"host\.name\": \"[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\"/\"host.name\": \
 
 #save config
 sacli --value_file=config.txt ConfigReplace
+service openvpnas restart
 
 
 
