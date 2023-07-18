@@ -13,7 +13,7 @@ The following example demonstrates the basic usage of the ec2-openvpn module:
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name = format("%s-%s-openvpn", var.project, var.environment)
+  name = "Openvpn Access Server"
 
   instance_type = "t3.micro"
   key_name      = ""
@@ -22,10 +22,9 @@ module "ec2-openvpn" {
   user_openvpn  = "user-1"
   routing_ip    = "172.31.0.0/16"
 
-  tags = merge(local.common_tags, {
+  tags = {
     OS     = "Ubuntu",
-    Backup = "DailyBackup"
-  })
+  }
 }
 ```
 ### Complete EC2-OpenVPN
@@ -34,7 +33,7 @@ For more advanced configurations, you can use the complete example below:
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name                          = format("%s-%s-openvpn", var.project, var.environment)
+  name                          = "Openvpn Access Server"
   create_ami                    = false
   ami_id                        = "xxxxxx"
   instance_type                 = "t3.micro"
@@ -47,10 +46,9 @@ module "ec2-openvpn" {
   vpc_security_group_ids        = "xxxxx"
   iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
 
-  tags = merge(local.common_tags, {
+  tags = {
     OS     = "Ubuntu",
-    Backup = "DailyBackup"
-  })
+  }
 }
 ```
 ## Inputs
