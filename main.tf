@@ -2,7 +2,7 @@ locals {
   vars = {
     user_openvpn = var.user_openvpn
     routing_ip = var.routing_ip
-    ec2_public_ip = aws_eip.eipovpn.public_ip
+    ec2_public_ip = aws_eip.ovpn_eip.public_ip
   }
 }
 
@@ -22,8 +22,6 @@ resource "aws_instance" "openvpn" {
     http_endpoint = "enabled"
     http_tokens   = "required"
   }
-
-  depends_on = [aws_eip.eipovpn]
 
   root_block_device {
     volume_size           = 8
@@ -48,10 +46,13 @@ resource "aws_instance" "openvpn" {
 }
 
 //AWS Resource for Create EIP OpenVPN
-resource "aws_eip" "eipovpn" {
-  instance = aws_instance.openvpn.id
-  vpc      = true
-  tags     = { "Name" = "${var.name}-EIP" }
+resource "aws_eip" "ovpn_eip" {
+  domain = "vpc"
+}
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.openvpn.id
+  allocation_id = aws_eip.ovpn_eip
 }
 
 #test2
