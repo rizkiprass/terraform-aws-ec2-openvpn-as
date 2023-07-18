@@ -70,7 +70,7 @@ variable "user_openvpn" {
 }
 
 variable "routing_ip" {
-  description = "Additional username for login to Openvpn-AS"
+  description = "The private subnets that your clients need to access. Use an IP CIDR range"
   type = string
   default = null
 }
