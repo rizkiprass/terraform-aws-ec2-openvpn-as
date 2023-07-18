@@ -10,7 +10,7 @@ locals {
 # Instance
 ################################################################################
 resource "aws_instance" "openvpn" {
-  ami                    = var.ami ? data.aws_ami.ubuntu_20.id : var.ami_custom
+  ami                    = var.create_ami ? data.aws_ami.ubuntu_20.id : var.ami
   instance_type          = var.instance_type
   key_name               = var.key_name
   subnet_id              = var.subnet_id
@@ -37,12 +37,6 @@ resource "aws_instance" "openvpn" {
   }
 
   tags = merge({ "Name" = var.name }, var.tags)
-
-  #  tags = merge(local.common_tags, {
-  #    Name   = local.openvpn_name,
-  #    OS     = "Ubuntu",
-  #    Backup = "DailyBackup"
-  #  })
 }
 
 //AWS Resource for Create EIP OpenVPN
@@ -55,66 +49,41 @@ resource "aws_eip_association" "eip_assoc" {
   allocation_id = aws_eip.ovpn_eip.id
 }
 
-#test2
 ################################################################################
 # Security Group
 ################################################################################
+variable "openvpn-sg-port" {
+  type = map(any)
+  default = {
+    "openvpn"  = 943
+    "openvpn2" = 945
+    "openvpn3" = 1194
+    "openvpn4" = 443
+    "openvpn5" = 22
+  }
+}
 
 resource "aws_security_group" "this" {
   count       = var.create_vpc_security_group_ids ? 1 : 0
   name        = "${var.name}-sg"
   description = "Default security group for OpenVPN"
   vpc_id      = var.vpc_id
-
-  ingress {
-    from_port = 1194
-    to_port   = 1194
-    protocol  = "udp"
-    cidr_blocks = [
-    "0.0.0.0/0"]
-    description = "point-to-point encrypted tunnels between hosts"
-  }
-
-  ingress {
-    from_port = 943
-    to_port   = 943
-    protocol  = "tcp"
-    cidr_blocks = [
-    "0.0.0.0/0"]
-    description = "access web interface"
-  }
-
-  ingress {
-    from_port = 945
-    to_port   = 945
-    protocol  = "tcp"
-    cidr_blocks = [
-    "0.0.0.0/0"]
-    description = "connect ovpn client"
-  }
-
-  ingress {
-    from_port = 22
-    to_port   = 22
-    protocol  = "tcp"
-    cidr_blocks = [
-    "0.0.0.0/0"]
-    description = "ssh"
-  }
-
-  ingress {
-    from_port = 443
-    to_port   = 443
-    protocol  = "tcp"
-    cidr_blocks = [
-    "0.0.0.0/0"]
-    description = "https"
+  dynamic "ingress" {
+    for_each = var.openvpn-sg-port
+    content {
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+      cidr_blocks = [
+      "0.0.0.0/0"]
+      description = ingress.key
+    }
   }
 
   egress {
     from_port = 0
     to_port   = 0
-    protocol  = "-1" //all traffic
+    protocol  = "-1"
     cidr_blocks = [
     "0.0.0.0/0"]
   }
@@ -123,12 +92,7 @@ resource "aws_security_group" "this" {
     create_before_destroy = true
   }
 
-  #  tags = merge(local.common_tags, {
-  #    Name = local.sg_openvpn_name
-  #  })
-
   tags = { Terraform = "Yes" }
-
 }
 
 ############### data ami #####################

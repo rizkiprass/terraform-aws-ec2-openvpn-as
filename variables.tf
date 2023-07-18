@@ -10,13 +10,13 @@ variable "tags" {
   default     = {}
 }
 
-variable "ami_custom" {
+variable "ami" {
   description = "ID of AMI to use for the OpenVPN instance"
   type        = string
   default     = null
 }
 
-variable "ami" {
+variable "create_ami" {
   description = "ID of AMI to use for the OpenVPN instance"
   type        = bool
   default     = true
@@ -57,8 +57,8 @@ variable "create_vpc_security_group_ids" {
   default     = true
 }
 
-variable "subnet_id" {
-  description = "The VPC Subnet ID to launch in"
+variable "ec2_subnet_id" {
+  description = "The place of subnet Openvpn-AS EC2"
   type        = string
   default     = null
 }
