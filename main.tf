@@ -52,7 +52,7 @@ resource "aws_eip" "ovpn_eip" {
 
 resource "aws_eip_association" "eip_assoc" {
   instance_id   = aws_instance.openvpn.id
-  allocation_id = aws_eip.ovpn_eip
+  allocation_id = aws_eip.ovpn_eip.id
 }
 
 #test2
