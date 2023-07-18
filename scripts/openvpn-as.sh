@@ -30,6 +30,7 @@ sed -E -i "s/\"vpn\.server\.routing\.private_network\.0\": \"[0-9]+\.[0-9]+\.[0-
 
 #config network settings
 sed -E -i "s/\"host\.name\": \"[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\"/\"host.name\": \"${ec2_public_ip}\"/" config.txt
+sed -E -i "s|\"vpn\.server\.routing\.private_network\.0\": \"[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+\"|\"vpn.server.routing.private_network.0\": \"${ec2_public_ip}\"|" config.txt
 
 #save config
 sacli --value_file=config.txt ConfigReplace

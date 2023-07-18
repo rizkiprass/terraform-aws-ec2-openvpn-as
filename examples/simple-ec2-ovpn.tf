@@ -26,7 +26,11 @@ module "ec2-openvpn" {
 # Supporting Resources
 ################################################################################
 
+
+###########################
 #Create Role ssm core role
+###########################
+
 resource "aws_iam_role" "ssm-core-role" {
   name_prefix        = format("%s-ssm-core-role", var.project)
   assume_role_policy = <<POLICY
@@ -66,3 +70,8 @@ resource "aws_iam_instance_profile" "ssm-profile" {
   name = format("%s-ssm-profile", var.project)
   role = aws_iam_role.ssm-core-role.name
 }
+
+###########################
+#Create VPC
+###########################
+
