@@ -25,7 +25,7 @@ echo "$password"> /home/ubuntu/user1-password.txt
 ./sacli --user ${user_openvpn} --new_pass "$password" SetLocalPassword
 
 #config vpn settings
-/usr/local/openvpn_as/scripts# sacli ConfigQuery > config.txt
+sacli ConfigQuery > config.txt
 sed -E -i "s/\"vpn\.server\.routing\.private_network\.0\": \"[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+\/[0-9]+\"/\"vpn.server.routing.private_network.0\": \"${routing_ip}\"/" config.txt
 
 #config network settings
