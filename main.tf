@@ -13,7 +13,7 @@ resource "aws_instance" "openvpn" {
   ami                    = var.create_ami ? data.aws_ami.ubuntu_20.id : var.ami
   instance_type          = var.instance_type
   key_name               = var.key_name
-  subnet_id              = var.subnet_id
+  subnet_id              = var.ec2_subnet_id
   vpc_security_group_ids = var.create_vpc_security_group_ids ? [aws_security_group.this[0].id] : var.vpc_security_group_ids
   iam_instance_profile   = var.iam_instance_profile
   user_data              = base64encode(templatefile("${path.module}/scripts/openvpn-as.sh", local.vars))
