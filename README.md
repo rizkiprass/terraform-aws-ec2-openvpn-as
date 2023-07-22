@@ -33,6 +33,30 @@ module "ec2-openvpn" {
   }
 }
 ```
+### Complete EC2-OpenVPN
+For more advanced configurations, you can use the complete example below:
+```hcl
+module "ec2-openvpn" {
+  source = "rizkiprass/ec2-openvpn-as/aws"
+
+  name                          = "Openvpn Access Server"
+  create_ami                    = false
+  ami_id                        = "xxxxxx"
+  instance_type                 = "t3.micro"
+  key_name                      = ""
+  vpc_id                        = aws_vpc.vpc.id
+  ec2_subnet_id                 = aws_subnet.public-subnet-3a.id
+  user_openvpn                  = "user-1"
+  routing_ip                    = "172.31.0.0/16"
+  create_vpc_security_group_ids = false
+  vpc_security_group_ids        = "xxxxx"
+  iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
+
+  tags = {
+    OS     = "Ubuntu",
+  }
+}
+```
 ## How to Connect to OpenVPN Access Server
 
 1. After successfully deploying the OpenVPN Access Server module, log in to your server using SSH or any other method.
@@ -65,32 +89,6 @@ Open the file to view the username and password for the OpenVPN Access Server ad
 
 That's it! You are now connected to your OpenVPN Access Server, and your data is encrypted and transmitted securely. If you encounter any issues, double-check your credentials and the URL you entered in the OpenVPN Connect application.
 
-
-
-### Complete EC2-OpenVPN
-For more advanced configurations, you can use the complete example below:
-```hcl
-module "ec2-openvpn" {
-  source = "rizkiprass/ec2-openvpn-as/aws"
-
-  name                          = "Openvpn Access Server"
-  create_ami                    = false
-  ami_id                        = "xxxxxx"
-  instance_type                 = "t3.micro"
-  key_name                      = ""
-  vpc_id                        = aws_vpc.vpc.id
-  ec2_subnet_id                 = aws_subnet.public-subnet-3a.id
-  user_openvpn                  = "user-1"
-  routing_ip                    = "172.31.0.0/16"
-  create_vpc_security_group_ids = false
-  vpc_security_group_ids        = "xxxxx"
-  iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
-
-  tags = {
-    OS     = "Ubuntu",
-  }
-}
-```
 ## Inputs
 
 | Name                              | Description                                                                                      | Type        | Default    | Required |
