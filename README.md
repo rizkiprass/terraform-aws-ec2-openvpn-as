@@ -1,3 +1,9 @@
+<div style="display: flex; justify-content: center;">
+  <div>
+    <img src="./images/openvpn-as-banner.png" alt="OpenvpnAS" style="width: 300px;">
+  </div>
+</div>
+
 # terraform-aws-ec2-openvpn-as
 Terraform module which creates EC2 resources with OpenVPN AS (Access Server) installed on AWS
 
@@ -27,6 +33,40 @@ module "ec2-openvpn" {
   }
 }
 ```
+## How to Connect to OpenVPN Access Server
+
+1. After successfully deploying the OpenVPN Access Server module, log in to your server using SSH or any other method.
+
+2. Once you are logged in, navigate to the following location to find the OpenVPN Access Server user admin credentials:
+`/home/ubuntu/user-admin-pass.txt`
+Open the file to view the username and password for the OpenVPN Access Server admin.
+3. For additional users, you can find their credentials at the following location: `/home/ubuntu/user1-password.txt`
+4. Download the OpenVPN Connect application if you haven't already. You can get it from the official OpenVPN website by clicking [here](https://openvpn.net/client/client-connect-vpn-for-windows/).
+
+5. Once the OpenVPN Connect application is installed, open it on your device.
+
+6. To import the OpenVPN profile, follow these steps:
+
+    a. Click on the "+" icon in the OpenVPN Connect application to add a new profile.
+
+    b. Enter the URL of your OpenVPN Access Server. The URL should be in the following format, replacing `<your ip public ec2>` with the public IP address of your EC2 instance:
+
+   ```
+   https://<your ip public ec2>
+   ```
+
+    c. Click "Add" to import the profile.
+
+7. You will be prompted to enter the username and password that you obtained in step 2 for the OpenVPN Access Server admin.
+
+8. Once you've entered the admin credentials, the OpenVPN profile will be imported, and you will be connected to the OpenVPN Access Server.
+
+9. Now you can access your private network securely through the OpenVPN connection.
+
+That's it! You are now connected to your OpenVPN Access Server, and your data is encrypted and transmitted securely. If you encounter any issues, double-check your credentials and the URL you entered in the OpenVPN Connect application.
+
+
+
 ### Complete EC2-OpenVPN
 For more advanced configurations, you can use the complete example below:
 ```hcl
