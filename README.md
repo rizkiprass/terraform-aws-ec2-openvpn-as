@@ -91,21 +91,21 @@ That's it! You are now connected to your OpenVPN Access Server, and your data is
 
 ## Inputs
 
-| Name                              | Description                                                                                      | Type        | Default    | Required |
-| --------------------------------- | ------------------------------------------------------------------------------------------------ | ----------- | ---------- | -------- |
+| Name                              | Description                                                                                       | Type        | Default    | Required |
+| --------------------------------- |---------------------------------------------------------------------------------------------------| ----------- | ---------- | -------- |
 | name                              | The name to be used for the OpenVPN instance created.                                             | string      | ""         | Yes      |
-| instance_type                     | The type of instance to start.                                                                   | string      | "t3.micro" | Yes      |
-| key_name                          | Key name of the Key Pair to use for the instance. Leave it empty for no SSH access.             | string      | ""         | No       |
-| vpc_id                            | The ID of the VPC where the EC2 instance will be deployed.                                       | string      | -          | Yes      |
-| ec2_subnet_id                     | The ID of the subnet within the VPC where the EC2 instance will reside.                          | string      | -          | Yes      |
-| user_openvpn                      | An additional username for logging in to the OpenVPN Access Server.                              | string      | -          | Yes      |
-| routing_ip                        | The private subnets that your clients need to access. Use an IP CIDR range, e.g., "172.31.0.0/16".| string      | -          | Yes      |
-| create_vpc_security_group_ids     | Determines whether an SG is created or to use an existing SG.                                    | bool        | true       | No       |
-| vpc_security_group_ids            | A list of security group IDs to associate with.                                                  | list(string)| null       | No       |
+| instance_type                     | The type of instance to start.                                                                    | string      | "t3.micro" | Yes      |
+| key_name                          | Key name of the Key Pair to use for the instance. Leave it empty for no SSH access.               | string      | ""         | No       |
+| vpc_id                            | The ID of the VPC where the EC2 instance will be deployed.                                        | string      | -          | Yes      |
+| ec2_subnet_id                     | The ID of the subnet within the VPC where the EC2 instance will reside.                           | string      | -          | Yes      |
+| user_openvpn                      | An additional username for log in in to the OpenVPN Access Server.                                | string      | -          | Yes      |
+| routing_ip                        | The private subnets that your clients need to access. Use an IP CIDR range, e.g., "172.31.0.0/16". | string      | -          | Yes      |
+| create_vpc_security_group_ids     | Determines whether an SG is created or to use an existing SG.                                     | bool        | true       | No       |
+| vpc_security_group_ids            | A list of security group IDs to associate with.                                                   | list(string)| null       | No       |
 | ami                               | ID of AMI to use for the OpenVPN instance.                                                        | string      | null       | No       |
-| create_ami                        | Determines whether to create an AMI or use an existing one.                                      | bool        | true       | No       |
-| iam_instance_profile              | IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile. | string      | null       | No       |
-| ec2_public_ip                     | Public IP Address of EC2, which VPN clients use to connect to the Access Server.                 | string      | ""         | No       |
+| create_ami                        | Determines whether to create an AMI or use an existing one.                                       | bool        | true       | No       |
+| iam_instance_profile              | IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile.  | string      | null       | No       |
+| ec2_public_ip                     | Public IP Address of EC2, which VPN clients use to connect to the Access Server.                  | string      | ""         | No       |
 
 For a complete list of input variables and their descriptions, refer to the [variables.tf](variables.tf) file.
 
