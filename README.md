@@ -29,7 +29,7 @@ module "ec2-openvpn" {
   routing_ip    = "172.31.0.0/16"
 
   tags = {
-    C
+    OS = "Ubuntu"
   }
 }
 ```
