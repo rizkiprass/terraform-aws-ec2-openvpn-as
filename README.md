@@ -29,7 +29,7 @@ module "ec2-openvpn" {
   routing_ip    = "172.31.0.0/16"
 
   tags = {
-    OS     = "Ubuntu",
+    C
   }
 }
 ```
@@ -49,7 +49,7 @@ module "ec2-openvpn" {
   user_openvpn                  = "user-1"
   routing_ip                    = "172.31.0.0/16"
   create_vpc_security_group_ids = false
-  vpc_security_group_ids        = "xxxxx"
+  vpc_security_group_ids        = ["xxxxx"]
   iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
 
   tags = {
@@ -73,11 +73,7 @@ Open the file to view the username and password for the OpenVPN Access Server ad
 
     a. Click on the "+" icon in the OpenVPN Connect application to add a new profile.
 
-    b. Enter the URL of your OpenVPN Access Server. The URL should be in the following format, replacing `<your ip public ec2>` with the public IP address of your EC2 instance:
-
-   ```
-   https://<your ip public ec2>
-   ```
+    b. Enter the URL of your OpenVPN Access Server. The URL should be in the following format, replacing `<your ip public ec2>` with the public IP address of your EC2 instance: `https://<your ip public ec2>`
 
     c. Click "Add" to import the profile.
 

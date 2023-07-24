@@ -1,7 +1,7 @@
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name = format("%s-%s-openvpn", var.project, var.environment)
+  name = "Openvpn Access Server"
 
   instance_type = "t3.micro"
   key_name      = ""
@@ -11,8 +11,7 @@ module "ec2-openvpn" {
   routing_ip    = "172.31.0.0/16"
 
   tags = merge(local.common_tags, {
-    OS     = "Ubuntu",
-    Backup = "DailyBackup"
+    OS = "Ubuntu",
   })
 }
 
