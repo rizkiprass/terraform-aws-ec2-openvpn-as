@@ -19,7 +19,7 @@ variable "ami" {
 variable "create_ami" {
   description = "ID of AMI to use for the OpenVPN instance"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "instance_type" {
@@ -54,7 +54,7 @@ variable "vpc_id" {
 variable "create_vpc_security_group_ids" {
   description = "Determines whether an SG is created or to use an existing SG"
   type        = bool
-  default     = true
+  default     = false
 }
 
 variable "ec2_subnet_id" {
