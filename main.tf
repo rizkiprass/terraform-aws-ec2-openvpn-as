@@ -41,12 +41,8 @@ resource "aws_instance" "openvpn" {
 
 //AWS Resource for Create EIP OpenVPN
 resource "aws_eip" "ovpn_eip" {
-  domain = "vpc"
-}
-
-resource "aws_eip_association" "eip_assoc" {
-  instance_id   = aws_instance.openvpn.id
-  allocation_id = aws_eip.ovpn_eip.id
+  instance = aws_instance.openvpn.id
+  domain   = "vpc"
 }
 
 ################################################################################
