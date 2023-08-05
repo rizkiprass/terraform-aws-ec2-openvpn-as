@@ -1,8 +1,8 @@
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name          = "Openvpn Access Server"
-  create_ami    = true
+  name = "Openvpn Access Server"
+
   instance_type = "t3.micro"
   key_name      = ""
   vpc_id        = aws_vpc.vpc.id

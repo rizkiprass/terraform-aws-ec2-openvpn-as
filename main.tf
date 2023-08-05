@@ -2,7 +2,7 @@ locals {
   vars = {
     user_openvpn = var.user_openvpn
     routing_ip = var.routing_ip
-    ec2_public_ip = aws_eip.eip-ovpn.public_ip
+    ec2_public_ip = aws_eip.ovpn_eip.public_ip
   }
 }
 
@@ -10,11 +10,11 @@ locals {
 # Instance
 ################################################################################
 resource "aws_instance" "openvpn" {
-  ami                    = var.create_ami ? var.ami : data.aws_ami.ubuntu_20.id
+  ami                    = var.create_ami ? data.aws_ami.ubuntu_20.id : var.ami
   instance_type          = var.instance_type
   key_name               = var.key_name
   subnet_id              = var.ec2_subnet_id
-  vpc_security_group_ids = var.create_vpc_security_group_ids ? var.vpc_security_group_ids : [aws_security_group.this[0].id]
+  vpc_security_group_ids = var.create_vpc_security_group_ids ? [aws_security_group.this[0].id] : var.vpc_security_group_ids
   iam_instance_profile   = var.iam_instance_profile
   user_data              = base64encode(templatefile("${path.module}/scripts/openvpn-as.sh", local.vars))
 
@@ -36,16 +36,17 @@ resource "aws_instance" "openvpn" {
     prevent_destroy = false
   }
 
-  depends_on = [aws_eip.eip-ovpn]
-
   tags = merge({ "Name" = var.name }, var.tags)
 }
 
 //AWS Resource for Create EIP OpenVPN
-resource "aws_eip" "eip-ovpn" {
-  instance = aws_instance.openvpn.id
-  vpc      = true
-  tags = merge({ "Name" = var.name}, var.tags)
+resource "aws_eip" "ovpn_eip" {
+  domain = "vpc"
+}
+
+resource "aws_eip_association" "eip_assoc" {
+  instance_id   = aws_instance.openvpn.id
+  allocation_id = aws_eip.ovpn_eip.id
 }
 
 ################################################################################
