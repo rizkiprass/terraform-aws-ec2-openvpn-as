@@ -29,7 +29,7 @@ resource "aws_instance" "openvpn" {
     iops                  = 3000
     encrypted             = true
     delete_on_termination = true
-    tags                  = merge({ "Name" = var.name }, var.tags)
+    tags                  = merge({ "Name" = format("%s-ebs", var.name) }, var.tags)
   }
 
   lifecycle {

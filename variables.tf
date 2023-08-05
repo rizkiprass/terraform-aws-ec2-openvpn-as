@@ -17,7 +17,7 @@ variable "ami" {
 }
 
 variable "create_ami" {
-  description = "ID of AMI to use for the OpenVPN instance"
+  description = "Determines whether an AMI is created or using AMI that you choose"
   type        = bool
   default     = false
 }

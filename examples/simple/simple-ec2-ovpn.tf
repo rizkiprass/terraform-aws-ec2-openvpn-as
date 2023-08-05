@@ -1,14 +1,15 @@
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name = "Openvpn Access Server"
-
-  instance_type = "t3.micro"
-  key_name      = ""
-  vpc_id        = aws_vpc.vpc.id
-  ec2_subnet_id = aws_subnet.public-subnet-3a.id
-  user_openvpn  = "user-1"
-  routing_ip    = "172.31.0.0/16"
+  name                          = "Openvpn Access Server"
+  create_ami                    = true
+  create_vpc_security_group_ids = true
+  instance_type                 = "t3.micro"
+  key_name                      = ""
+  vpc_id                        = aws_vpc.vpc.id
+  ec2_subnet_id                 = aws_subnet.public-subnet-3a.id
+  user_openvpn                  = "user-1"
+  routing_ip                    = "172.31.0.0/16"
 
   tags = merge(local.common_tags, {
     OS = "Ubuntu",
