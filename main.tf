@@ -40,9 +40,10 @@ resource "aws_instance" "openvpn" {
 }
 
 //AWS Resource for Create EIP OpenVPN
-resource "aws_eip" "ovpn_eip" {
+resource "aws_eip" "eip-ovpn" {
   instance = aws_instance.openvpn.id
-  domain   = "vpc"
+  vpc      = true
+  tags = merge({ "Name" = var.name}, var.tags)
 }
 
 ################################################################################
