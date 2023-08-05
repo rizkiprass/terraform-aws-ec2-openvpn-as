@@ -36,6 +36,8 @@ resource "aws_instance" "openvpn" {
     prevent_destroy = false
   }
 
+  depends_on = [aws_eip.eip-ovpn]
+
   tags = merge({ "Name" = var.name }, var.tags)
 }
 
