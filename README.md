@@ -35,7 +35,7 @@ module "ec2-openvpn" {
 }
 ```
 ### Complete EC2-OpenVPN
-For more advanced configurations, you can use the complete example below:
+For more configurations, you can use the complete example below:
 ```hcl
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
@@ -96,7 +96,7 @@ That's it! You are now connected to your OpenVPN Access Server, and your data is
 | user_openvpn                      | An additional username for log in in to the OpenVPN Access Server.                                | string      | -          | Yes      |
 | routing_ip                        | The private subnets that your clients need to access. Use an IP CIDR range, e.g., "172.31.0.0/16". | string      | -          | Yes      |
 | create_vpc_security_group_ids     | Determines whether an SG is created or to use an existing SG.                                     | bool        | false      | No       |
-| vpc_security_group_ids            | A list of security group IDs to associate with.                                                   | list(string)| null       | No       |
+| vpc_security_group_ids            | A list of security group IDs to associate with the EC2 OpenVPN AS.                                                   | list(string)| null       | No       |
 | ami                               | ID of AMI to use for the OpenVPN instance.                                                        | string      | null       | No       |
 | create_ami                        | Determines whether an AMI is created or using AMI that you choose.                                       | bool        | false      | No       |
 | iam_instance_profile              | IAM Instance Profile to launch the instance with. Specified as the name of the Instance Profile.  | string      | null       | No       |
