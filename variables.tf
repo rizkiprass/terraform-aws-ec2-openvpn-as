@@ -80,3 +80,9 @@ variable "ec2_public_ip" {
   type = string
   default = ""
 }
+
+variable "root_block_device" {
+  description = "Customize for root disk"
+  type        = list(any)
+  default     = []
+}

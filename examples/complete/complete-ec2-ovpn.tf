@@ -12,6 +12,13 @@ module "ec2-openvpn" {
   vpc_security_group_ids        = ["xxxxx"]
   iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
 
+    root_block_device = [
+    {
+      volume_type = "gp3"
+      volume_size = 100
+    },
+  ]
+
   tags = merge(local.common_tags, {
     OS = "Ubuntu",
   })
