@@ -40,20 +40,27 @@ For more configurations, you can use the complete example below:
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name                          = "Openvpn Access Server"
-  ami_id                        = "xxxxxx"
-  instance_type                 = "t3.micro"
-  key_name                      = ""
-  vpc_id                        = aws_vpc.vpc.id
-  ec2_subnet_id                 = aws_subnet.public-subnet-3a.id
-  user_openvpn                  = "user-1"
-  routing_ip                    = "172.31.0.0/16"
-  vpc_security_group_ids        = ["xxxxx"]
-  iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
+  name                   = "Openvpn Access Server"
+  ami_id                 = "ami-05b5a865c3579bbc4"
+  instance_type          = "t3.micro"
+  key_name               = ""
+  vpc_id                 = aws_vpc.vpc.id
+  ec2_subnet_id          = aws_subnet.public-subnet-3a.id
+  user_openvpn           = "user-1"
+  routing_ip             = "172.31.0.0/16"
+  vpc_security_group_ids = [aws_security_group.openvpn-sg.id]
+  iam_instance_profile   = aws_iam_instance_profile.ssm-profile.name
 
-  tags = merge(local.common_tags, {
-    OS = "Ubuntu",
-  })
+  root_block_device = [
+    {
+      volume_type = "gp3"
+      volume_size = 100
+    },
+  ]
+
+  tags = {
+    Terraform = "Yes"
+  }
 }
 ```
 ## How to Connect to OpenVPN Access Server
