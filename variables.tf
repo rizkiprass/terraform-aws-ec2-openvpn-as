@@ -10,7 +10,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "ami" {
+variable "ami_id" {
   description = "ID of AMI to use for the OpenVPN instance"
   type        = string
   default     = null
@@ -79,4 +79,10 @@ variable "ec2_public_ip" {
   description = "Public IP Address of EC2 which VPN clients use to connect to the Access Server"
   type = string
   default = ""
+}
+
+variable "root_block_device" {
+  description = "Customize for root disk"
+  type        = list(any)
+  default     = []
 }

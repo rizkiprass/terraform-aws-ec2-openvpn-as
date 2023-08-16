@@ -7,6 +7,10 @@ variable "project" {
   default = "sandbox"
 }
 
+variable "region" {
+  default = "eu-west-3"
+}
+
 locals {
   common_tags = {
     Project     = var.project
