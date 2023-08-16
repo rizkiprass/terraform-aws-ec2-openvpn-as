@@ -10,7 +10,7 @@ variable "tags" {
   default     = {}
 }
 
-variable "ami" {
+variable "ami_id" {
   description = "ID of AMI to use for the OpenVPN instance"
   type        = string
   default     = null

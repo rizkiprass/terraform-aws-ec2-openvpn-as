@@ -10,7 +10,7 @@ locals {
 # Instance
 ################################################################################
 resource "aws_instance" "openvpn" {
-  ami                    = var.create_ami ? data.aws_ami.ubuntu_20.id : var.ami
+  ami                    = var.create_ami ? data.aws_ami.ubuntu_20.id : var.ami_id
   instance_type          = var.instance_type
   key_name               = var.key_name
   subnet_id              = var.ec2_subnet_id

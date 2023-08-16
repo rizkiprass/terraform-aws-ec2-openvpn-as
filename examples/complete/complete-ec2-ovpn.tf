@@ -1,27 +1,27 @@
 module "ec2-openvpn" {
   source = "rizkiprass/ec2-openvpn-as/aws"
 
-  name                          = "Openvpn Access Server"
-  ami_id                        = "xxxxxx"
-  instance_type                 = "t3.micro"
-  key_name                      = ""
-  vpc_id                        = aws_vpc.vpc.id
-  ec2_subnet_id                 = aws_subnet.public-subnet-3a.id
-  user_openvpn                  = "user-1"
-  routing_ip                    = "172.31.0.0/16"
-  vpc_security_group_ids        = ["xxxxx"]
-  iam_instance_profile          = aws_iam_instance_profile.ssm-profile.name
+  name                   = "Openvpn Access Server"
+  ami_id                 = "ami-05b5a865c3579bbc4"
+  instance_type          = "t3.micro"
+  key_name               = ""
+  vpc_id                 = aws_vpc.vpc.id
+  ec2_subnet_id          = aws_subnet.public-subnet-3a.id
+  user_openvpn           = "user-1"
+  routing_ip             = "172.31.0.0/16"
+  vpc_security_group_ids = [aws_security_group.openvpn-sg.id]
+  iam_instance_profile   = aws_iam_instance_profile.ssm-profile.name
 
-    root_block_device = [
+  root_block_device = [
     {
       volume_type = "gp3"
       volume_size = 100
     },
   ]
 
-  tags = merge(local.common_tags, {
-    OS = "Ubuntu",
-  })
+  tags = {
+    Terraform = "Yes"
+  }
 }
 
 ################################################################################
@@ -162,4 +162,55 @@ resource "aws_route_table_association" "rt-subnet-assoc-public-3a" {
 resource "aws_route_table_association" "rt-subnet-assoc-public-3b" {
   subnet_id      = aws_subnet.public-subnet-3b.id
   route_table_id = aws_route_table.public-rt.id
+}
+
+variable "bastion-host-port-list" {
+  type = map(any)
+  default = {
+    "http"  = 80
+    "https" = 443
+    "ssh"   = 22
+  }
+}
+
+variable "openvpn-sg-port" {
+  type = map(any)
+  default = {
+    "openvpn"  = 943
+    "openvpn2" = 945
+    "openvpn3" = 1194
+    "openvpn4" = 443
+    "openvpn5" = 22
+  }
+}
+
+resource "aws_security_group" "openvpn-sg" {
+  name        = "openvpn-sg"
+  description = "Default security group for OpenVPN"
+  vpc_id      = aws_vpc.vpc.id
+  dynamic "ingress" {
+    for_each = var.openvpn-sg-port
+    content {
+      from_port = ingress.value
+      to_port   = ingress.value
+      protocol  = "tcp"
+      cidr_blocks = [
+      "0.0.0.0/0"]
+      description = ingress.key
+    }
+  }
+
+  egress {
+    from_port = 0
+    to_port   = 0
+    protocol  = "-1"
+    cidr_blocks = [
+    "0.0.0.0/0"]
+  }
+
+  lifecycle {
+    create_before_destroy = true
+  }
+
+  tags = { Terraform = "Yes" }
 }
