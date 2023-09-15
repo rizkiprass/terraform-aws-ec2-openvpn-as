@@ -1,7 +1,5 @@
-<div style="display: flex; justify-content: center;">
-  <div>
-    <img src="./images/openvpn-as-banner.png" alt="OpenvpnAS" style="width: 300px;">
-  </div>
+<div align="center">
+  <img src="./images/openvpn-as-banner.png" alt="OpenvpnAS" style="width: 300px;">
 </div>
 
 # terraform-aws-ec2-openvpn-as
@@ -9,6 +7,10 @@ Terraform module which creates EC2 resources with OpenVPN AS (Access Server) ins
 
 ## Overview
 The terraform-aws-ec2-openvpn-as module is designed to simplify the process of deploying an EC2 instance with OpenVPN Access Server installed on the AWS cloud platform. This module takes care of creating the necessary resources and configurations, allowing you to quickly set up a secure and scalable OpenVPN environment.
+
+<div align="center">
+  <img src="./images/openvpn-module-arch.png" alt="architecture" style="width: 300px;">
+</div>
 
 
 ## Example Usages
