@@ -31,9 +31,9 @@ module "ec2-openvpn" {
   user_openvpn                  = "user-1"
   routing_ip                    = "172.31.0.0/16"
 
-  tags = merge(local.common_tags, {
-    OS = "Ubuntu",
-  })
+  tags = {
+    Terraform = "Yes"
+  }
 }
 ```
 ### Complete EC2-OpenVPN
