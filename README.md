@@ -67,7 +67,7 @@ module "ec2-openvpn" {
 ```
 ## How to Connect to OpenVPN Access Server
 
-1. After successfully deploying the OpenVPN Access Server module, log in to your server using SSH or any other method.
+1. After successfully deploying the OpenVPN Access Server module, log in to your server using SSH or any other method. (login as: ubuntu)
 
 2. Once you are logged in, navigate to the following location to find the OpenVPN Access Server user admin credentials:
 `/home/ubuntu/user-admin-pass.txt`
