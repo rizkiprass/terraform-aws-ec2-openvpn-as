@@ -72,6 +72,11 @@ module "ec2-openvpn" {
 2. Once you are logged in, navigate to the following location to find the OpenVPN Access Server user admin credentials:
 `/home/ubuntu/user-admin-pass.txt`
 Open the file to view the username and password for the OpenVPN Access Server admin.
+
+<div align="center">
+  <img src="./images/ss-cred-ovpn.png" alt="OpenvpnAS" style="width: 300px;">
+</div>
+
 3. For additional users, you can find their credentials at the following location: `/home/ubuntu/user1-password.txt`
 4. Download the OpenVPN Connect application if you haven't already. You can get it from the official OpenVPN website by clicking [here](https://openvpn.net/client/client-connect-vpn-for-windows/).
 
@@ -85,6 +90,14 @@ Open the file to view the username and password for the OpenVPN Access Server ad
 
     c. Click "Add" to import the profile.
 
+<div align="center">
+  <img src="./images/import.png" alt="OpenvpnAS" style="width: 300px;">
+</div>
+
+<div align="center">
+  <img src="./images/input-ip-public.png" alt="OpenvpnAS" style="width: 300px;">
+</div>
+
 7. You will be prompted to enter the username and password that you obtained in step 2 for the OpenVPN Access Server admin.
 
 8. Once you've entered the admin credentials, the OpenVPN profile will be imported, and you will be connected to the OpenVPN Access Server.
@@ -92,6 +105,15 @@ Open the file to view the username and password for the OpenVPN Access Server ad
 9. Now you can access your private network securely through the OpenVPN connection.
 
 That's it! You are now connected to your OpenVPN Access Server, and your data is encrypted and transmitted securely. If you encounter any issues, double-check your credentials and the URL you entered in the OpenVPN Connect application.
+
+Follow below step to edit configuration of the openvpn:
+10. Login to openvpn admin using https://16.78.138.43:943/admin
+Enter username and password. You can find the username and password at step no 2
+<div align="center">
+  <img src="./images/ovpn-admin-login.png" alt="OpenvpnAS" style="width: 300px;">
+</div>
+
+11. Click Sign In, then you will go to OpenVPN Access Server configuration
 
 ## Inputs
 
