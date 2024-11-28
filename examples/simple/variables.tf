@@ -8,7 +8,7 @@ variable "project" {
 }
 
 variable "region" {
-  default = "eu-west-3"
+  default = "us-east-1"
 }
 
 locals {
